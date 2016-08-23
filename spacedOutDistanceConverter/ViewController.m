@@ -8,19 +8,19 @@
 
 #import "ViewController.h"
 
-double convertToKm(double distance) {
-    double distanceInKm = distance * 3.0857e16;
-    return distanceInKm;
-}
-
-double convertToMiles(double distance) {
-    double distanceInMiles = distance * 1.9174e13;
-    return distanceInMiles;
+double convertToMetres(double distance) {
+    double distanceInMetres = distance * 3.0857e16;
+    return distanceInMetres;
 }
 
 double convertToAu(double distance) {
     double distanceInAu = distance * 2.0626e5;
     return distanceInAu;
+}
+
+double convertToLightYears(double distance) {
+    double distanceInLightYears = distance * 3.265156;
+    return distanceInLightYears;
 }
 
 @interface ViewController ()
@@ -46,14 +46,14 @@ double convertToAu(double distance) {
     double userInput = [self.userInputTxt.text doubleValue];
     NSMutableString *buf = [NSMutableString new];
     if (self.unitSelectorSegCntrl.selectedSegmentIndex == 0) {
-        double kmValue = convertToKm(userInput);
-        [buf appendString: [NSString stringWithFormat:@"%.5e km", kmValue]];
+        double metreValue = convertToMetres(userInput);
+        [buf appendString: [NSString stringWithFormat:@"%.3e metres", metreValue]];
     } else if (self.unitSelectorSegCntrl.selectedSegmentIndex == 1) {
-        double milesValue = convertToMiles(userInput);
-        [buf appendString:[NSString stringWithFormat:@"%.5e miles", milesValue]];
-    } else {
         double auValue = convertToAu(userInput);
-        [buf appendString:[NSString stringWithFormat:@"%.5e AU", auValue]];
+        [buf appendString:[NSString stringWithFormat:@"%.3e astronomical units", auValue]];
+    } else {
+        double lightYearValue = convertToLightYears(userInput);
+        [buf appendString:[NSString stringWithFormat:@"%.3e light years", lightYearValue]];
     }
     self.outputLbl.text = buf;
     
